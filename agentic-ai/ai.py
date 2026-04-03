@@ -26,3 +26,25 @@ response = client.chat.completions.create(
 
 # 🖨️ Print response
 print(response.choices[0].message.content)
+
+##################################################################
+# ✅ Structured evaluation using Pydantic
+from pydantic import BaseModel
+
+# 📦 Response schema
+class Evaluation(BaseModel):
+    is_acceptable: bool
+    feedback: str
+
+def evaluate(reply: str, message: str, history: List[Dict]) -> Evaluation:
+    """Evaluate model reply and return structured result."""
+    messages = build_messages(reply, message, history)
+    response = gemini.beta.chat.completions.parse(
+        model="gemini-2.5-flash",
+        messages=messages,
+        response_format=Evaluation,
+    )
+    parsed: Evaluation | None = response.choices[0].message.parsed
+    if parsed is None:
+        raise ValueError("Evaluation parsing failed")
+    return parsed
