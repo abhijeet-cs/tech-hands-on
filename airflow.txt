@@ -1,0 +1,37 @@
+🧭 What is Airflow
+Airflow is a workflow orchestration platform used to schedule, manage, and monitor pipelines.
+
+⚙️ Core Components
+Metadata DB: Source of truth (task state, configs, DAG metadata)
+Scheduler: Decides when tasks should run 
+Executor: Decides how / where tasks run
+Queue: Stores tasks waiting for execution
+DAG File Processor: Parses DAG files and serializes them into the database
+Worker: Executes actual tasks
+Triggerer: Handles async waiting (deferrable / non-blocking tasks)
+
+🧩 Operators
+Operators define the type of work performed by a task.
+
+🏗️ Multinode Architecture (Execution Flow)
+1. API Server
+Interface to Metadata DB
+Used by UI, workers, and triggerer
+2. DAG Processors
+Parse DAG files
+Store serialized DAGs in DB
+3. Scheduler + Executor
+Read task metadata from DB
+Push runnable tasks into Queue
+4. Workers
+Pull tasks from Queue
+Execute tasks
+Update status via API Server
+
+🔌 Operator Configuration
+If a connection type is missing in Airflow UI:
+pip install apache-airflow-providers-<provider>
+
+🎯 Priority-Based Queues
+Priority-based queues allow routing tasks to specific workers based on workload, priority, or resource needs.
+Configure Worker Queues: airflow celery worker -q high_priority,default
