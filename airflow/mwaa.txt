@@ -1,4 +1,3 @@
-
 🏗️ Architecture
 Metadata DB: AWS Aurora
 6 copies of data across 3 AZs (Highly available)
