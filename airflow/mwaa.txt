@@ -1,0 +1,81 @@
+
+🏗️ Architecture
+Metadata DB: AWS Aurora
+6 copies of data across 3 AZs (Highly available)
+Sub 10ms replication lag
+<30m failover
+Autoscale read replicas upto 15
+5X faster than MySQL RDS and 3X faster than Postgres RDS
+20% more expensive compared to RDS
+Storage scales in increments of 10GB till 256TB
+❓ Is it AP or CP in CAP theorem?
+
+Scheduler & Worker: AWS Fargate containers
+Queue: Amazon SQS
+DAG Storage: Amazon S3
+Monitoring: Amazon CloudWatch
+
+###########################################################
+
+🚀Autoscaling in MWAA
+Based on:
+Tasks waiting in the Celery queue
+Worker CPU/memory usage
+Number of running vs pending tasks
+
+❓ Scaling in MWAA: vertical, horizontal or both?
+❓ What scale can be achieved?
+❓ What parameters decide that scale?
+
+###########################################################
+🚨Disaster Recovery (DR)
+References:
+https://aws.amazon.com/blogs/big-data/disaster-recovery-strategies-for-amazon-mwaa-part-1/
+https://aws.amazon.com/blogs/big-data/disaster-recovery-strategies-for-amazon-mwaa-part-2/
+
+Solution 1: Backup and Restore
+Flow:
+Backup metadata DB into S3 based on RPO
+CloudWatch metrics emitted
+Setup monitoring + Lambda + Step Functions
+Step Function creates new MWAA environment
+Call import to restore states
+
+Characteristics:
+Cheaper
+High RTO
+Environment recreated during failure
+
+Use when:
+Cost sensitive workloads
+Longer recovery acceptable
+
+
+Solution 2: Active–Passive
+Flow:
+Backup metadata DB into S3 based on RPO
+CloudWatch metrics emitted
+Setup monitoring + Lambda + Step Functions
+Passive MWAA activated
+Call import to restore states
+
+Characteristics:
+Costly
+Low RTO
+Standby environment already available
+
+Use when:
+Faster recovery required
+Critical production workflows
+
+❓ Cross-region or same-region DR recommended for MWAA?
+###########################################################
+
+Open Questions:
+❓ Pros and cons of MWAA versus self hosted? Extra features provided by MWAA?
+❓ How to resolve missing DAGs and deadlock issue if parsing time is high?
+❓ What observability metrics and tools should one configure?
+❓ How are deployments done?
+❓ Static versus dynamic DAG? Pros and cons? Does static DAG solve the deployment problem?
+❓ Does Airflow provide native capability for dependency?
+❓ What was the RTO of your service?
