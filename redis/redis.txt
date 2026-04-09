@@ -1,0 +1,28 @@
+What use cases can Redis support?
+String - GET,SET,DEL
+List - RPUSH,LPOP,LRANGE,LINDEX
+Set - SADD,SREM,SMEMBERS,SISMEMBER
+Sorted Set - ZADD,ZREM,ZRANGE,ZRANGEBYSCORE,ZINCRBY,ZREVRANGEBYSCORE,ZINTERSTORE
+Pub / Sub - SUBSCRIBE,UNSUBSCRIBE,PUBLISH,PSUBSCRIBE,PUNSUBSCRIBE
+Auto Expiry - PERSIST, TTL, EXPIRE, EXPIREAT
+
+How is availability guaranteed?
+Data can be saved to disk via - 
+Snapshot - BGSAVE,SAVE,SYNC,SHUTDOWN
+AOL(Append Only File) - always,everysec,no
+During replication => Dump of BGSAVE -> Write backlogs -> Stream write commands to slave.
+
+How to configure Master Slave?
+Use SLAVEOF property in slaves.
+Automatic failover can be achieved using Redis Sentinel.
+
+❓How much time does it take for replication to occur?
+❓How does consistency play out in case of multiple replicas?
+❓How can scalability be achieved?
+
+How to know performance limits of a setup?
+Actual perf is ~50-60% of what is given by redis-benchmark command
+
+❓Pros and cons of using Redis
+❓Is it possible to have custom data type with custom implementation?
+❓Cloud offerings of Redis in AWS,GCP and Azure
