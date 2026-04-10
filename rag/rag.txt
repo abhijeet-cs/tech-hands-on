@@ -1,0 +1,8 @@
+Step 1: Document and Pre-Processing
+Split data into chunks using document/text splitter
+Convert chunks into vectors using embeddings and store into Vector DB
+
+Step 2: Query Processing
+Convert input query via embeddings into vector.
+Use similarity search in vector DB to get retrieved chunks.
+Use input query + retrieved chunks as the new augmented data to the LLM.
