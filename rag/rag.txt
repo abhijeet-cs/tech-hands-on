@@ -1,26 +1,25 @@
-Step 1: Document and Pre-Processing
-Split data into chunks using document/text splitter
-Convert chunks into vectors using embeddings and store into Vector DB
+📄 Step 1: Document & Pre-processing
+- Split data into chunks
+- Convert chunks to embeddings (vectors)
+- Store in Vector DB
 
-Step 2: Query Processing
-Convert input query via embeddings into vector.
-Use similarity search in vector DB to get retrieved chunks.
-Use input query + retrieved chunks as the new augmented data to the LLM.
+🔍 Step 2: Query Processing
+- Convert query to vector
+- Retrieve similar chunks
+- Send query + context to LLM
 
-Vector Store vs Vector Databases
-1. Library/tool vs full-feature database system
-2. In memory/local file vs Enterprise application
-3. Simple similarity search vs Advanced search with filtering, metadata queries 
-4. Prototype vs Production applications
+🆚 Vector Store vs Vector DB
+- Tool vs Full database
+- Local vs Enterprise
+- Basic vs Advanced search (filters, metadata)
+- Prototype vs Production
 
-#### Understanding Similarity Scores
-The similarity score represents how closely related a document chunk is to your query. The scoring depends on the distance metric used:
+📏 Similarity Scores
 
-ChromaDB default: Uses L2 distance (Euclidean distance)
-- Lower scores = MORE similar (closer in vector space)
-- Score of 0 = identical vectors
-- Typical range: 0 to 2 (but can be higher)
+Chroma (L2 Distance):
+- Lower score = more similar
+- 0 = identical
 
-Cosine similarity (if configured):
-- Higher scores = MORE similar
-- Range: -1 to 1 (1 being identical)
+Cosine Similarity:
+- Higher score = more similar
+- Range: -1 to 1
