@@ -6,3 +6,21 @@ Step 2: Query Processing
 Convert input query via embeddings into vector.
 Use similarity search in vector DB to get retrieved chunks.
 Use input query + retrieved chunks as the new augmented data to the LLM.
+
+Vector Store vs Vector Databases
+1. Library/tool vs full-feature database system
+2. In memory/local file vs Enterprise application
+3. Simple similarity search vs Advanced search with filtering, metadata queries 
+4. Prototype vs Production applications
+
+#### Understanding Similarity Scores
+The similarity score represents how closely related a document chunk is to your query. The scoring depends on the distance metric used:
+
+ChromaDB default: Uses L2 distance (Euclidean distance)
+- Lower scores = MORE similar (closer in vector space)
+- Score of 0 = identical vectors
+- Typical range: 0 to 2 (but can be higher)
+
+Cosine similarity (if configured):
+- Higher scores = MORE similar
+- Range: -1 to 1 (1 being identical)

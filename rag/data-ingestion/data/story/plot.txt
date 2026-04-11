@@ -1,0 +1,4 @@
+Bella met Emma during a late-night coding sprint, both chasing a 
+stubborn bug that refused to die. Frustration turned into laughter, and laughter into friendship. 
+They built apps, broke systems, and rebuilt each other through failures and breakthroughs. Years passed. Startups rose and fell. Technologies changed. Their bond didn’t. Forty years later, Bella sat beside Emma, now frail but smiling, recalling their first commit together. Emma whispered, “We debugged life pretty well.” When she was gone, Bella opened their old repository, ran the code, 
+and smiled through tears. Some programs end, but some connections keep running forever.
